@@ -4,6 +4,8 @@ const mongoose=require('mongoose');
 const adminRouter=require('./routes/admin');
 const userRouter=require('./routes/user');
 
+//for env
+require('dotenv').config();
 const app=express();
 
 app.use(cors());
@@ -13,7 +15,7 @@ app.use("/admin",adminRouter);
 app.use("/users",userRouter);
 
 //connect database
-mongoose.connect('mongodb+srv://ompbabhinav2:U3BrGYnZiKnaUDs3@cluster0.3pz91ie.mongodb.net/course_selling_app')
+mongoose.connect(process.env.MONGO_URL);
 
 
 app.listen(3000, () => {
