@@ -13,7 +13,7 @@ function Course()
    const[course,setCourse]=useState({});
 
    useEffect(()=>{
-      fetch('http://localhost:3000/users/course/'+courseId,{
+      fetch('https://coursemaster-c156.onrender.com/users/course/'+courseId,{
          method:'GET',
          headers:{
             'Authorization':'Bearer '+localStorage.getItem('token')
@@ -52,7 +52,7 @@ function Coursecomp(props)
    </CardContent>
    <CardActions>
    <Button variant="contained" color="success" style={{width:400,margin:'auto'}} onClick={()=>{
-      fetch('http://localhost:3000/users/courses/'+props.course._id,{
+      fetch('https://coursemaster-c156.onrender.com/users/courses/'+props.course._id,{
          method:'POST',
          headers:{
             'Authorization':'Bearer '+localStorage.getItem('token')

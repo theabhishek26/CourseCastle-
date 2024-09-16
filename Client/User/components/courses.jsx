@@ -13,7 +13,7 @@ function Allcourses()
     const[courses,setCourses]=useState([]);
     
     useEffect(()=>{
-        fetch('http://localhost:3000/users/courses',{
+        fetch('https://coursemaster-c156.onrender.com/users/courses',{
             method:'GET',
             headers:{
                 'Authorization':'Bearer '+localStorage.getItem('token')

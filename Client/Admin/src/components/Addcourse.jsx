@@ -38,7 +38,7 @@ function Addcourse()
        }}  label="Image-Link" variant="outlined" />
 
        <Button variant="contained" onClick={()=>{
-         fetch('http://localhost:3000/admin/courses',{
+         fetch('https://coursemaster-c156.onrender.com/admin/courses',{
             method:'POST',
             headers:{'Authorization':'Bearer'+' '+localStorage.getItem('token'),
                 'Content-Type':'application/json'

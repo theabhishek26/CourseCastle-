@@ -9,7 +9,7 @@ function Navbar()
   const [username,setUsername]=useState(null);
 
   useEffect(()=>{
-    fetch('http://localhost:3000/users/me',{
+    fetch('https://coursemaster-c156.onrender.com/users/me',{
       method:'GET',
       headers:{
         'Content-Type':'application/json',

@@ -14,7 +14,7 @@ function Courses()
     //getting courses array from backend and setting it to state variable courses
 
     useEffect(()=>{
-        fetch('http://localhost:3000/admin/courses',{
+        fetch('https://coursemaster-c156.onrender.com/admin/courses',{
             method:'GET',
             headers:{
                 'Authorization':'Bearer '+localStorage.getItem('token')

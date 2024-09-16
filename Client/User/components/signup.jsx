@@ -26,7 +26,7 @@ function Signup()
     }}/>
 
     <Button variant="contained" onClick={()=>{
-      fetch('http://localhost:3000/users/signup',{method:'POST',
+      fetch('https://coursemaster-c156.onrender.com/users/signup',{method:'POST',
         headers:{
           'Content-Type':'application/json'
         },

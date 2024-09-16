@@ -29,7 +29,7 @@ function Signup()
             <Button variant="contained" onClick={()=>{
                 // const username=document.getElementById('username').value;
                 // const password=document.getElementById('password').value;
-                fetch('http://localhost:3000/admin/signup',{
+                fetch('https://coursemaster-c156.onrender.com/admin/signup',{
                     method:'POST',
                     body:JSON.stringify({username:email,password:password}),
                     headers:{

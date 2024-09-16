@@ -13,7 +13,7 @@ function Appbar()
 
   //for adding conditional rendering once logged in
   useEffect(()=>{
-    fetch('http://localhost:3000/admin/me',{
+    fetch('https://coursemaster-c156.onrender.com/admin/me',{
       method:'GET',
       headers:{
         'Authorization':'Bearer '+localStorage.getItem('token'),
