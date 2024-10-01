@@ -26,6 +26,22 @@ const user_schema=new mongoose.Schema({
     purchased_courses:[{type:mongoose.Schema.Types.ObjectId,ref:'Courses'}]
   })
   
+
+  // if an object(course) is referenced in multiple places(users) in mongoDB and if main object(course) is deleted, how to make sure all referenced also deleted 
+  // Pre-remove middleware to handle cascading delete 
+course_schema.pre('remove', async function (next) {
+  const courseId = this._id;
+
+  // Remove references to the deleted course from the User collection
+  await mongoose.model('user').updateMany(
+    { purchased_courses: courseId },
+    { $pull: { purchased_courses: courseId } }
+  );
+
+  next();
+});
+
+
 //schema to model
 const admin=mongoose.model('Admin',admin_schema);
 //see now in mongodb compass Admin collection created
