@@ -39,7 +39,7 @@ function Appbar()
               window.location='/addcourse'
           }} >Add Course</Button>
 
-          <Button variant="contained" onClick={()=>{
+          <Button variant="contained" color="error" onClick={()=>{
               localStorage.setItem('token',null)
 
               //for auto refresh

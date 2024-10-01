@@ -140,7 +140,7 @@ function Updatecourse(props)
        }}  label="Image-Link" variant="outlined" />
 
        <Button variant="contained" onClick={()=>{
-         fetch('https://coursemaster-c156.onrender.com/admin/courses/'+props.id,{
+         fetch('https://coursemaster-c156.onrender.com/admin/course/'+props.id,{
             method:'PUT',
             headers:{'Authorization':'Bearer'+' '+localStorage.getItem('token'),
                 'Content-Type':'application/json'
