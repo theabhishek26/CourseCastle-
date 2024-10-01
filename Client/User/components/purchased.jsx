@@ -24,7 +24,7 @@ function PurchasedCourses()
 
    },[])
 
-   if(purchased.length==0)
+   if(!purchased)
    {
     return(
       <Typography variant='h6' style={{textAlign:'center'}}>No Purchased Courses</Typography>
