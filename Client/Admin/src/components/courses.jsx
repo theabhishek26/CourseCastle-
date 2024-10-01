@@ -84,7 +84,7 @@ function Coursecomp(props)
 
 
             <Button variant="contained" onClick={()=>{
-              fetch('https://coursemaster-c156.onrender.com/admin/course/'+props.course._id,{
+              fetch('https://coursemaster-c156.onrender.com/admin/courses/'+props.course._id,{
                 method:'DELETE',
                 headers:{
                     'Authorization':'Bearer '+localStorage.getItem('token')

@@ -27,6 +27,18 @@ function Allcourses()
         })
     },[])
 
+    if(!courses)
+      {
+        return(
+          <>
+          <h1 style={{textAlign:'center'}}>COURSES</h1>
+          <Typography variant='h6' style={{ color: 'text.secondary',textAlign:'center'}}>
+                No courses Added
+              </Typography>
+          </>
+        )
+      }
+
 
   return(
     <div>
