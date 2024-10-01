@@ -49,6 +49,8 @@ function Addcourse()
          }).then((res)=>{
             if(res)
                 alert('course added')
+               //for empyting form entries
+                window.location='/addcourse'
          })
        }}>Add Course</Button>
        </div>

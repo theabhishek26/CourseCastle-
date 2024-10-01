@@ -91,6 +91,8 @@ router.get('/me',authenticateJwt,(req,res)=>{
         }).catch(err=> res.send(err))
   });
   
+
+
   ////////////////////////////////////////////////////////////////
   // logic to get all courses
   router.get('/courses',authenticateJwt,async (req, res) => {
@@ -113,5 +115,22 @@ router.get('/me',authenticateJwt,(req,res)=>{
       res.json({course:result});
     })
   })
+
+    //logic to delete a course by given id
+    router.delete('/course/:courseId',authenticateJwt,async (req, res) => {
+         
+      let input_courseId=req.params.courseId;       
+      
+      try {
+        const result = await course.findByIdAndDelete(input_courseId);
+        if (result) {
+          res.json({message:result});
+        } else {
+          res.json({message:'No document found with that ID'});
+        }
+      } catch (err) {
+        console.error({message:'Error deleting document:'+err});
+      }
+  });
   
   module.exports=router

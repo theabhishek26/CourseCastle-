@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 
 function Courses()
 {
-    const[courses,setCourses]=React.useState([])
+    let[courses,setCourses]=React.useState([])
     //[] is necessary to declare empty array without this the map function return undefined
 
     //getting courses array from backend and setting it to state variable courses
@@ -30,6 +30,18 @@ function Courses()
         })
     },[])
     
+    if(!courses)
+    {
+      return(
+        <>
+        <h1 style={{textAlign:'center'}}>COURSES</h1>
+        <Typography variant='h6' style={{ color: 'text.secondary',textAlign:'center'}}>
+              No courses Added
+            </Typography>
+        </>
+      )
+    }
+
     return(
         <>
         <h1 style={{textAlign:'center'}}>COURSES</h1>
@@ -69,7 +81,25 @@ function Coursecomp(props)
             <Button variant="outlined" onClick={()=>{
               window.location='/course/'+props.course._id
             }}>VIEW</Button>
-            <Button variant="contained">DELETE</Button>
+
+
+            <Button variant="contained" onClick={()=>{
+              fetch('https://coursemaster-c156.onrender.com/admin/course/'+props.course._id,{
+                method:'DELETE',
+                headers:{
+                    'Authorization':'Bearer '+localStorage.getItem('token')
+                } 
+               }).then((res)=>
+               {
+                if(res)
+                  window.location='/courses/'
+                alert('course deleted')
+               }
+                   )
+           
+            }}>DELETE</Button>
+
+
             </div>
           </CardContent>
         </CardActionArea>

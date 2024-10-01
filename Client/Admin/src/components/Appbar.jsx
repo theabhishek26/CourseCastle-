@@ -32,8 +32,13 @@ function Appbar()
     return (
       <div style={{display:'flex',justifyContent:'space-between',padding:'10px'}}>
           <Typography variant='h5'>CourseMaster</Typography>
-          <div>
-            {email}
+          <div style={{display:'flex',gap:10}}>
+          <Typography variant='h6'>{email}</Typography>
+
+          <Button variant="contained" onClick={()=>{
+              window.location='/addcourse'
+          }} >Add Course</Button>
+
           <Button variant="contained" onClick={()=>{
               localStorage.setItem('token',null)
 
