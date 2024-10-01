@@ -57,7 +57,10 @@ function Coursecomp(props)
          headers:{
             'Authorization':'Bearer '+localStorage.getItem('token')
          }
-      }).then(()=>alert('course Purchased!')).catch((err)=>alert(err))
+      }).then(()=>{
+         window.location='courses/purchased'
+         alert('course Purchased!')
+      }).catch((err)=>alert(err))
    }}>
   BUY-{props.course.price}
 </Button>
