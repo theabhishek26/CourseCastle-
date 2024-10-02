@@ -1,2 +1,2 @@
-Admin Link:(https://coursemaster-admin.vercel.app/)[https://coursemaster-admin.vercel.app/]
-User Link:(https://coursemaster-user.vercel.app/)[https://coursemaster-user.vercel.app/]
+Admin Link:[Click here](https://coursemaster-admin.vercel.app/)
+User Link:[Click here](https://coursemaster-user.vercel.app/)
