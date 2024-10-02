@@ -6,7 +6,7 @@ import Navbar from '../components/navbar';
 import Signin from '../components/signin';
 import Allcourses from '../components/courses';
 import Course from '../components/course'
-import PurchasedCourses from '../components/purcahsed';
+import PurchasedCourses from '../components/purchased';
 function App()
 {
   return(
