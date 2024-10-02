@@ -6,7 +6,7 @@ import Appbar from './components/Appbar'
 import Addcourse from './components/Addcourse'
 import Courses from './components/courses'
 import Course from './components/course';
-
+import Banner from './components/banner';
 import {RecoilRoot} from 'recoil';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         {/* appbar placed here to use usenavigate in it */}
         <Appbar/>
         <Routes>
-         <Route path='/' element={<Signin/>}/>
+          <Route path='/' element={<Banner/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/signin' element={<Signin/>}/>
           <Route path='/addcourse' element={<Addcourse/>}/>
