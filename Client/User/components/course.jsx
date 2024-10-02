@@ -59,7 +59,7 @@ function Coursecomp(props)
          }
       }).then(()=>{
          alert('course Purchased!')
-         window.location='courses/purchased/'
+         window.location.href='/courses/purchased'
       }).catch((err)=>alert(err))
    }}>
   BUY-{props.course.price}
