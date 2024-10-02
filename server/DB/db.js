@@ -30,7 +30,7 @@ const user_schema=new mongoose.Schema({
   // if an object(course) is referenced in multiple places(users) in mongoDB and if main object(course) is deleted, how to make sure all referenced also deleted 
   // Pre-remove middleware to handle cascading delete
   
-  //NOT SOLVED
+  //SOLVED
 course_schema.pre('remove', async function (next) {
   const courseId = this._id;
 

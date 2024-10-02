@@ -58,8 +58,8 @@ function Coursecomp(props)
             'Authorization':'Bearer '+localStorage.getItem('token')
          }
       }).then(()=>{
-         // window.location='courses/purchased/'
          alert('course Purchased!')
+         window.location='courses/purchased/'
       }).catch((err)=>alert(err))
    }}>
   BUY-{props.course.price}
