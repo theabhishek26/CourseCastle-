@@ -1,5 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body{
     padding: 0;
     margin:0;
     box-sizing:border-box;
+}
+
+/* banner-top */
+.buttonOrangeBg{
+    @apply font-bold bg-porange text-white text-xl px-4 py-1 rounded-md hover:bg-orange-400 hover:scale-105 active:scale-95
+}
+
+/* Appbar */
+
+.nav-item{
+    @apply flex lg:gap-2 items-center p-2 rounded-lg hover:scale-110 transition-all duration-300
 }

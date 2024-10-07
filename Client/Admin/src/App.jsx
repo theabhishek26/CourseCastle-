@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css'
 import Signup from './components/signup'
 import Signin from './components/signin'
@@ -8,11 +8,12 @@ import Courses from './components/courses'
 import Course from './components/course';
 import Banner from './components/banner';
 import {RecoilRoot} from 'recoil';
+import DashBoard from './components/Dashboard';
+
 
 function App() {
   return (
-    <>
-      
+    <>     
       <RecoilRoot>
       <Router>
         {/* appbar placed here to use usenavigate in it */}
@@ -23,9 +24,11 @@ function App() {
           <Route path='/signin' element={<Signin/>}/>
           <Route path='/addcourse' element={<Addcourse/>}/>
           <Route path='/courses' element={<Courses/>}/>        
-          <Route path='/course/:courseId' element={<Course/>}/>        
+          <Route path='/course/:courseId' element={<Course/>}/>
+          <Route path='/dashboard' element={<DashBoard/>}/>
         </Routes>
       </Router>
+      
       </RecoilRoot>
     </>
   )

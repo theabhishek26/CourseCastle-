@@ -1,69 +1,114 @@
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Appbar()
-{
-  const navigate=useNavigate()
-  
-  //for rendering after logged in
-  const[email,setEmail]=useState(null);
+function Appbar(){
 
+    const [navOpen,setNavopen]=useState(false);   
+    const[username,setUsername]=useState(null);
+    const navigate=useNavigate();
 
-  //for adding conditional rendering once logged in
-  useEffect(()=>{
+   useEffect(()=>{
     fetch('https://coursemaster-c156.onrender.com/admin/me',{
-      method:'GET',
-      headers:{
-        'Authorization':'Bearer '+localStorage.getItem('token'),
-        'Content-Type':'application/json'
-      }
-    }  
-    ).then((res)=>{
-      res.json().then((data)=>setEmail(data.username));
-    })
-  },[])
+        method:'GET',
+        headers:{
+           'Authorization':'Bearer '+localStorage.getItem('token'),
+           'Content-Type':'application/json'
+        }
+    }).then((res)=>res.json().then((data)=>{
+        if(data.username)
+            setUsername(data.username);
+    })).catch((err)=>
+      console.log(err)
+    )},[])
+     
 
+    //render only when logged in
+    if(username)
+    {
+        //navopen
+    if(navOpen)
+        {
+            return(
+                <div className="border-2 bg-orange-200 flex flex-col lg:w-1/5 md:w-1/3 h-[100vh] md:gap-28 gap-20 p-4  font-afacad" >
+                    <div className="logo flex items-center justify-between">
+                    <div className="logo text-3xl font-semibold">
+                    Course<span className="text-porange font-cursive font-bold ">Master</span>
+                    </div>
+                    <button class="toggle material-symbols-outlined hover:scale-110 active:scale-95" onClick={()=>{
+                        setNavopen(!navOpen);
+                    }}>arrow_back</button>
+                    </div>
+        
+                    <div className="profile flex flex-col items-center gap-2">
+                        <div className="profile-image w-14 h-14 rounded-full bg-black">
+                         
+                        </div>
+                        <div className="profile-name md:text-3xl text-2xl font-bold">
+                           Hello {username}
+                        </div>
+                    </div>
+        
+                    <div className="list md:text-2xl text-lg flex flex-col gap-4">
+                            <button className="nav-item bg-zinc-300"> <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                            </button>
+                            <button className="nav-item" onClick={()=>{
+                                // navigate('/courses')
+                                 //for auto refresh
+                                 window.location='/courses'
+                            }}> <span class="material-symbols-outlined">book</span>
+                            <p>All courses</p>
+                            </button>
+                            <button className="nav-item" onClick={()=>{
+                                // navigate('/addcourse')
+                                 //for auto refresh
+                                 window.location='/addcourse'
+                            }}> <span class="material-symbols-outlined">add_business</span>
+                            <p>Add Courses</p>
+                            </button>
+                            <button className="nav-item"> <span class="material-symbols-outlined">person</span>
+                            <p>Profile</p>
+                            </button>
+                            <button className="nav-item" onClick={()=>{
+                                localStorage.setItem('token',null)
+                                //for auto refresh
+                                window.location='/signin'
+                            }}> <span class="material-symbols-outlined" >logout</span>
+                            <p>Logout</p>
+                            </button>
+                    </div>
+                </div>
+            )
+        }
+        
+    
+        //nav closed
+        return(
+            <div className="font-afacad flex justify-between items-center bg-orange-200 p-2">
+    
+                <div className="left flex items-center gap-2 justify-center">
+                    <button className="material-symbols-outlined border-black border-2 rounded-md p-1 hover:scale-105 active:scale-95" onClick={()=>{
+                        setNavopen(!navOpen);
+                    }}>menu</button>
+    
+                    <div className="logo md:text-3xl text-xl font-semibold">
+                    Course<span className="text-porange font-cursive font-bold ">Master</span>
+                    </div>
+                </div>
+    
+                <div className="mid font-bold lg:text-3xl md:text-2xl text-xl md:flex hidden lg:pr-32 md:pr-20">
+                    <p>Welcome Back, {username}</p>
+                </div>
+    
+                <div className="right flex items-center gap-4">
+                    <div className="profile-image w-10 h-10 rounded-full bg-black">
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
-  //render this on appbar once logged in
-  if(email)
-  {
-    return (
-      <div style={{display:'flex',justifyContent:'space-between',padding:'10px'}}>
-          <Typography variant='h5'>CourseMaster</Typography>
-          <div style={{display:'flex',gap:10}}>
-          <Typography variant='h6'>{email}</Typography>
-
-          <Button variant="contained" onClick={()=>{
-              window.location='/addcourse'
-          }} >Add Course</Button>
-
-          <Button variant="contained" color="error" onClick={()=>{
-              localStorage.setItem('token',null)
-
-              //for auto refresh
-              window.location='/signin'
-          }} >logout</Button>
-          </div>
-      </div>
-    )
-  }
-
-  //else render this 
-  return (
-    <div style={{display:'flex',justifyContent:'space-between',padding:'10px'}}>
-        <Typography variant='h5'>CourseMaster</Typography>
-        <div>
-        <Button variant="contained" onClick={()=>{
-            navigate('/signup')
-        }} >Sign Up</Button>
-
-        <Button variant="contained" onClick={()=>navigate('/signin')} style={{marginLeft:'5px'}}>Sign In</Button>
-
-        </div>
-    </div>
-  )
+   
 }
 
 export default Appbar;
