@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Appbar(){
+// const server='http://localhost:3000';
+const server='https://coursemaster-c156.onrender.com';
 
-    const [navOpen,setNavopen]=useState(false);   
+function Appbar({navOpen,setNavopen}){
+
     const[username,setUsername]=useState(null);
     const navigate=useNavigate();
 
    useEffect(()=>{
-    fetch('https://coursemaster-c156.onrender.com/admin/me',{
+    fetch(server+'/admin/me',{
         method:'GET',
         headers:{
            'Authorization':'Bearer '+localStorage.getItem('token'),
@@ -49,30 +51,28 @@ function Appbar(){
                     </div>
         
                     <div className="list md:text-2xl text-lg flex flex-col gap-4">
-                            <button className="nav-item bg-zinc-300"> <span class="material-symbols-outlined">dashboard</span>
+                            {/* <button className="nav-item bg-zinc-300"> <span class="material-symbols-outlined">dashboard</span>
                             <p>Dashboard</p>
-                            </button>
+                            </button> */}
                             <button className="nav-item" onClick={()=>{
-                                // navigate('/courses')
-                                 //for auto refresh
-                                 window.location='/courses'
+                                navigate('/courses')
                             }}> <span class="material-symbols-outlined">book</span>
                             <p>All courses</p>
                             </button>
                             <button className="nav-item" onClick={()=>{
-                                // navigate('/addcourse')
-                                 //for auto refresh
-                                 window.location='/addcourse'
+                                navigate('/addcourse')
                             }}> <span class="material-symbols-outlined">add_business</span>
                             <p>Add Courses</p>
                             </button>
-                            <button className="nav-item"> <span class="material-symbols-outlined">person</span>
+                            {/* <button className="nav-item"> <span class="material-symbols-outlined">person</span>
                             <p>Profile</p>
-                            </button>
+                            </button> */}
                             <button className="nav-item" onClick={()=>{
                                 localStorage.setItem('token',null)
-                                //for auto refresh
+                                // for auto refresh
                                 window.location='/signin'
+                                
+                                // navigate('/signin') TO BE SOLVED SEE app.jsx
                             }}> <span class="material-symbols-outlined" >logout</span>
                             <p>Logout</p>
                             </button>
@@ -84,7 +84,8 @@ function Appbar(){
     
         //nav closed
         return(
-            <div className="font-afacad flex justify-between items-center bg-orange-200 p-2">
+            //made it sticky to be fixed at top while only content scrolls
+            <div className="font-afacad flex justify-between items-center bg-orange-200 p-2 sticky top-0 w-full z-10">
     
                 <div className="left flex items-center gap-2 justify-center">
                     <button className="material-symbols-outlined border-black border-2 rounded-md p-1 hover:scale-105 active:scale-95" onClick={()=>{

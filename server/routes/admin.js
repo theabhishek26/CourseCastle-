@@ -1,14 +1,14 @@
 const express=require('express');
 const jwt=require('jsonwebtoken');
 const{authenticateJwt,jwtPass}=require('../middleware/authentication');  //object destructuring
-const {user,admin,course}=require('../DB/db');
-
+const {user,admin,course,video,comment}=require('../DB/db');
+const multer=require('multer');
 const router=express.Router();
+const path = require('path');
 
 // Admin routes
 
 //route to be called for rendering logged in react
-//*************/
 router.get('/me',authenticateJwt,(req,res)=>{
     let username=req.user.username;
     res.json({username});
@@ -65,10 +65,11 @@ router.get('/me',authenticateJwt,(req,res)=>{
   });
   
   
-  //Creates a new course.
+  //Creates a new course. //mware function  //chained function
   router.post('/courses',authenticateJwt, (req, res) => {
     
     const newCourse=new course(req.body);
+    newCourse.courseAdmin=req.user.username
     newCourse.save().then(()=> res.json({message:'Course created Succesfully',courseId:newCourse.id}));
   });
   
@@ -94,11 +95,11 @@ router.get('/me',authenticateJwt,(req,res)=>{
 
 
   ////////////////////////////////////////////////////////////////
-  // logic to get all courses
+  // logic to get all courses of logged in Admin
   router.get('/courses',authenticateJwt,async (req, res) => {
      
      //get array of all courses
-     const all_courses=await course.find({});
+     const all_courses=await course.find({courseAdmin:req.user.username});
   
      if(all_courses.length==0)
       res.json({message:'courses list empty'});
@@ -117,6 +118,7 @@ router.get('/me',authenticateJwt,(req,res)=>{
   })
 
     //logic to delete a course by given id
+    //***************************************/
     router.delete('/course/:courseId',authenticateJwt,async (req, res) => {
          
       let input_courseId=req.params.courseId;       
@@ -124,7 +126,15 @@ router.get('/me',authenticateJwt,(req,res)=>{
       try {
         const result = await course.findByIdAndDelete(input_courseId);
         if (result) {
-          res.json({message:result});
+
+          //deleting for users who have purchased the course-for maintaining consistency of DB and our Site
+          await user.updateMany(
+            {}, // Filter condition-matching all entries in this case
+            { $pull: {purchased_courses:input_courseId}} // Update operation
+          )
+
+
+          res.json({message:'course deleted',course:result});
         } else {
           res.json({message:'No document found with that ID'});
         }
@@ -132,5 +142,91 @@ router.get('/me',authenticateJwt,(req,res)=>{
         console.error({message:'Error deleting document:'+err});
       }
   });
-  
+///////////////video upload and play code///////////////
+
+//disk storage gives full control on storing files in disk
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname,'videos'))
+  },
+  filename: function (req, file, cb) {
+    const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null,uniquePrefix+'-'+file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage })
+/////////////////////////////////////////////////
+
+
+//video upload route
+router.post('/video/upload',authenticateJwt,upload.single('uploaded_video'),async(req,res)=>{
+  try{
+    const videoObj={
+      title:req.body.title,
+      description:req.body.description,
+      filePath:req.file.path,
+      fileName:req.file.filename,
+
+      //to relate video to a course
+      videoCourseId:req.body.videoCourseId
+    }
+
+    const uploadedVideo=new video(videoObj)
+    await uploadedVideo.save()
+    
+    res.json({message:'video uploaded successfully!',video:videoObj})
+  }
+  catch(err)
+    {
+      res.json({message:'video cannot be uploaded!',error:err})
+    }
+})
+
+
+//serve videos folder mware
+//path.join needed for compatibiity across different OS
+router.use('/videos',express.static(path.join(__dirname,'videos')))
+console.log(path.join(__dirname,'videos'))
+
+//get videos route
+router.get('/videos',authenticateJwt,async(req,res)=>{
+ try{
+   const all_videos=await video.find({});
+   res.json({message:'videos fetched sucessfully',videos:all_videos})
+ }
+ catch(err){
+  res.json({message:'error fetching videos',error:err});
+ }
+})
+
+//for uploading comments
+router.post('/comment',authenticateJwt,async(req,res)=>{
+  try{
+    const commentObj={
+      commentUsername:req.user.username,
+      commentBody:req.body.commentBody,
+      commentCourseId:req.body.commentCourseId
+    }
+
+    const newComment=new comment(commentObj);
+    await newComment.save();
+    res.json({message:'comment Posted!',comment:commentObj});
+  }
+  catch(err){
+    res.json({message:'error posting comment',error:err})
+  }
+})
+
+//for getting comments
+router.get('/comments',authenticateJwt,async(req,res)=>{
+  try{
+    const all_comments=await comment.find({});
+    res.json({comments:all_comments})
+  }
+  catch(err){
+    res.json({message:'cannot post comment',error:err})
+  }
+})
+
   module.exports=router

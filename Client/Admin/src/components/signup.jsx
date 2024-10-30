@@ -3,6 +3,12 @@ import React, { useState } from 'react'
 import image from '../assets/login.jpg'
 import { useNavigate } from 'react-router-dom';
 import Loader from './loader';
+
+
+// const server='http://localhost:3000';
+const server='https://coursemaster-c156.onrender.com';
+
+
 function Signup(){
     const navigate=useNavigate();
     const [email,setEmail]=useState();
@@ -69,12 +75,12 @@ function Signup(){
 
                    <button class="relative flex md:h-12 md:w-96 w-36 h-10 items-center justify-center overflow-hidden  text-white transition-all bg-black before:absolute before:h-0 before:w-0 before:rounded-full before:bg-white hover:text-black hover:font-bold before:duration-500 before:ease-out hover:before:h-56 hover:before:w-[600px] active:scale-95" onClick={()=>{
                     setLoader(true);
-                    fetch('https://coursemaster-c156.onrender.com/admin/signup',{
+                    fetch(server+'/admin/signup',{
                         method:'POST',
                         headers:{
                             'content-type':'application/json',
                         },
-                        body:JSON.stringify({username:'email',password:'password'})
+                        body:JSON.stringify({username:email,password:password})
                     }).then((res)=>res.json().then((data)=>{
 
                         setLoader(false);
@@ -90,7 +96,7 @@ function Signup(){
                                     localStorage.setItem('token',data.token);
                                     
                                     //reloading required
-                                    window.location='/dashboard'
+                                    window.location='/courses'
                                 }
                         },900)
                              
@@ -118,67 +124,3 @@ function Signup(){
 }
 
 export default Signup;
-
-
-
-
-
-
-
-
-
-
-// function Signup()
-// {
-//     const [email,setEmail]=React.useState()
-//     const[password,setPassword]=React.useState();
-
-//     return(
-//         <div style={{backgroundColor:'#eeeeee',fontSize:'20px',padding:'200px',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',alignContent:'center'}}>
-            
-//             <Typography variant="h6">
-//             Welcome to CourseMaster! Sign Up here
-//             </Typography>
-        
-//         <Card variant="outlined" style={{
-//             display:'flex',flexDirection:'column',padding:'40px',gap:'20px',width:'300px'
-//         }}> 
-//             <TextField onChange={(e)=>{
-//                 setEmail(e.target.value)
-//             }}label="Username" variant="outlined" size='normal' />
-
-//             <TextField onChange={(e)=>{
-//                 setPassword(e.target.value)
-//             }} label="Password" variant="outlined" />
-
-//             <Button variant="contained" onClick={()=>{
-//                 // const username=document.getElementById('username').value;
-//                 // const password=document.getElementById('password').value;
-//                 fetch('https://coursemaster-c156.onrender.com/admin/signup',{
-//                     method:'POST',
-//                     body:JSON.stringify({username:email,password:password}),
-//                     headers:{
-//                         'content-type':'application/json'
-//                     }
-//                 }).then((res)=>{
-//                     res.json().then((data)=>
-//                     {
-//                         // console.log(data)
-//                     //save token to localstorage
-//                     if(data.token)
-//                     localStorage.setItem('token',data.token)
-//                     //for auto refresh once logged in
-//                     window.location='/courses'
-//                     }
-//                 )
-//                 })
-
-                
-
-//             }}>Sign Up</Button>
-//         </Card>
-//        </div>
-//     )
-// }
-
-// export default Signup;

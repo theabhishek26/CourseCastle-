@@ -7,6 +7,7 @@ const router=express.Router();
 
 
 // User routes
+
 router.post('/signup',async (req, res) => {
     // logic to sign up user
   
@@ -58,6 +59,7 @@ router.post('/signup',async (req, res) => {
       let username=req.user.username;
       res.json({username});
   })
+  
   
   router.get('/courses',authenticateJwt,async (req, res) => {
     // logic to list all courses

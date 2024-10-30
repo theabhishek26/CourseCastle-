@@ -3,16 +3,19 @@ const cors=require('cors');
 const mongoose=require('mongoose');
 const adminRouter=require('./routes/admin');
 const userRouter=require('./routes/user');
-require('dotenv').config();
 //for env
 require('dotenv').config();
 const app=express();
+const bodyParser=require('body-parser')
 
 app.use(cors());
 app.use(express.json());
 
+//parse multi-form data to json-for videos form data
+app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use("/admin",adminRouter);
-app.use("/users",userRouter);
+app.use("/user",userRouter);
 
 //connect database
 mongoose.connect(process.env.MONGO_URL);

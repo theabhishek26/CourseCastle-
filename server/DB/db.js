@@ -11,7 +11,8 @@ const course_schema=new mongoose.Schema({
     description:String, 
     price: String, 
     imageLink:String,
-    published:Boolean
+    published:Boolean,
+    courseAdmin:String
   })
   
 const user_schema=new mongoose.Schema({
@@ -31,18 +32,33 @@ const user_schema=new mongoose.Schema({
   // Pre-remove middleware to handle cascading delete
   
   //NOT SOLVED
-course_schema.pre('remove', async function (next) {
-  const courseId = this._id;
+// course_schema.pre('remove', async function (next) {
+//   const courseId = this._id;
 
-  // Remove references to the deleted course from the User collection
-  await mongoose.model('user').updateMany(
-    { purchased_courses: courseId },
-    { $pull: { purchased_courses: courseId } }
-  );
+//   // Remove references to the deleted course from the User collection
+//   await mongoose.model('user').updateMany(
+//     { purchased_courses: courseId },
+//     { $pull: { purchased_courses: courseId } }
+//   );
 
-  next();
-});
+//   next();
+// });
 
+//for storing videos information in DB
+const video_schema=new mongoose.Schema({
+  title:String,
+  description:String,
+  filePath:String,
+  fileName:String,
+  videoCourseId:String
+})
+
+//for storing comments
+const comments_schema=new mongoose.Schema({
+  commentUsername:String,
+  commentBody:String,
+  commentCourseId:String
+})
 
 //schema to model
 const admin=mongoose.model('Admin',admin_schema);
@@ -50,7 +66,9 @@ const admin=mongoose.model('Admin',admin_schema);
 const course=mongoose.model('Courses',course_schema);
 //see now in mongodb compass Courses collection created
 const user=mongoose.model('User',user_schema);
+const video=mongoose.model('Videos',video_schema);
+const comment=mongoose.model('Comments',comments_schema);
 
 module.exports={
-    user,course,admin
+    user,course,admin,video,comment
 }

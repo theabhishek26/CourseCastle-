@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for Firefox */
+  .no-scrollbar {
+    scrollbar-width: none; /* Firefox */
+  }
+
+
 body{
     padding: 0;
     margin:0;
@@ -17,4 +28,14 @@ body{
 
 .nav-item{
     @apply flex lg:gap-2 items-center p-2 rounded-lg hover:scale-110 transition-all duration-300
+}
+
+/* All courses */
+.course-card-btns{
+    @apply relative flex md:h-12 w-20 h-10 items-center justify-center overflow-hidden  text-white transition-all before:absolute before:h-0 before:w-0 before:rounded-full before:bg-white hover:text-black hover:font-bold before:duration-500 before:ease-out hover:before:h-56 hover:before:w-[600px] active:scale-95 hover:scale-110 rounded-lg
+}
+
+/* Add courses */
+.input{
+    @apply border-2 border-black lg:w-[800px] md:w-[500px] w-[300px] h-14 text-center md:text-xl text-lg 
 }
