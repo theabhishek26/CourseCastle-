@@ -56,9 +56,9 @@ function Course(){
   return(
     <div className='font-afacad h-full p-2 bg-slate-50'>
 
-       <div className='grid grid-cols-3 h-[90vh]'>
+       <div className='grid md:grid-cols-3 h-[90vh]'>
 
-       <div className="left flex flex-col gap-4  p-2 col-span-2 text-xl">
+       <div className="left flex flex-col gap-4  p-2 md:col-span-2 text-xl">
         <div className="player flex justify-center h-96">
           <video className='w-full h-full' src={`${server}/admin/videos/${currVideoPath}`} poster={course.imageLink} controls autoPlay></video>
         </div>
@@ -110,7 +110,7 @@ function Course(){
 
        </div>
 
-       <div className="right border-2 border-yellow-500 flex flex-col items-center overflow-scroll no-scrollbar p-4">
+       <div className="right border-2 border-yellow-500 flex flex-col items-center md:overflow-scroll no-scrollbar p-4">
           <div className="title text-2xl font-bold mb-2">
             {course.title}
           </div>
@@ -146,7 +146,7 @@ function Course(){
 
 function Videoinfo({video,setCurrTitle,setCurrDescription,setCurrVideoPath}){
   return(
-    <div className='flex justify-between gap-4 w-[450px] px-4 py-3 rounded-lg bg-orange-200 hover:scale-105 cursor-pointer' onClick={()=>{
+    <div className='flex justify-between gap-4 lg:w-[450px] w-[200px] px-4 py-3 rounded-lg bg-orange-200 hover:scale-105 cursor-pointer' onClick={()=>{
       setCurrTitle(video.title)
       setCurrDescription(video.description)
 

@@ -31,7 +31,7 @@ function BuyCourse()
    },[])
    
    return(
-    <div>
+    <div className="mx-5">
       <Coursecomp course={course}></Coursecomp>
     </div>
    )
@@ -55,7 +55,7 @@ function Coursecomp(props)
      </Typography>
    </CardContent>
    <CardActions>
-   <Button variant="contained" color="success" style={{width:400,margin:'auto'}} onClick={()=>{
+   <Button className="hover:scale-105" variant="contained" color="success" style={{width:400,margin:'auto'}} onClick={()=>{
       fetch(server+'/user/courses/'+props.course._id,{
          method:'POST',
          headers:{
