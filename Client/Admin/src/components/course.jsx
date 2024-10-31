@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import Loader from '../../../User/src/components/loader';
+import Loader from '../components/loader';
 
 // const server=server+'';
 
