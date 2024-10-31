@@ -60,7 +60,7 @@ function Course(){
 
        <div className="left flex flex-col gap-4  p-2 md:col-span-2 text-xl">
         <div className="player flex justify-center h-96">
-          <video className='w-full h-full' src={`${server}/admin/videos/${currVideoPath}`} poster={course.imageLink} controls autoPlay></video>
+          <video className='w-full h-full' src={server+`/admin/videos/${currVideoPath}`} poster={course.imageLink} controls autoPlay></video>
         </div>
         <div className="videoDetails">
           <p className='text-3xl font-semibold'>{currTitle}</p>
