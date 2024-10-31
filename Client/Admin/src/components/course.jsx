@@ -5,8 +5,8 @@ import Loader from '../components/loader';
 
 // const server=server+'';
 
-// const server='https://coursemaster-c156.onrender.com';
-const server='http://localhost:3000';
+const server='https://coursemaster-c156.onrender.com';
+// const server='http://localhost:3000';
 
 function Course(){
   
