@@ -1,9 +1,12 @@
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import Loader from '../../../User/src/components/loader';
 
 // const server=server+'';
-const server='https://coursemaster-c156.onrender.com';
+
+// const server='https://coursemaster-c156.onrender.com';
+const server='http://localhost:3000';
 
 function Course(){
   
@@ -53,8 +56,16 @@ function Course(){
    //getting comments related to course
    const courseComments=comments.filter((comment)=>comment.commentCourseId===courseId)
 
+   //loader
+   const [loader,setLoader]=useState(false);
+
   return(
     <div className='font-afacad h-full p-2 bg-slate-50'>
+       
+       <div className={(loader?'block':'hidden')}>
+        UPLOADING......
+       <Loader showloader={loader}></Loader>
+       </div>
 
        <div className='grid md:grid-cols-3 h-[90vh]'>
 
@@ -122,7 +133,7 @@ function Course(){
           </div>
 
           {/* //display upload form conditionally */}
-          {showForm && <UploadFormComp toggleForm={toggleForm} courseId={courseId}/>}
+          {showForm && <UploadFormComp toggleForm={toggleForm} courseId={courseId} setLoader={setLoader}/>}
 
             {/* //display message if no video in array conditionally */}
             <div className="videoList flex flex-col gap-2">
@@ -160,28 +171,34 @@ function Videoinfo({video,setCurrTitle,setCurrDescription,setCurrVideoPath}){
   )
 }
 
-function UploadFormComp({toggleForm,courseId}){
+function UploadFormComp({toggleForm,courseId,setLoader}){
   const [title,setTitle]=useState();
   const [description,setDescription]=useState();
   const[uploadedVideo,setUploadedVideo]=useState();
   const [videoCourseId]=useState(courseId);
 
   function handleUpload(){
+    setLoader(true)
     const formdata =new FormData()
     formdata.append('title',title)
     formdata.append('description',description)
     formdata.append('videoCourseId',videoCourseId)
     formdata.append('uploaded_video',uploadedVideo)
-    console.log(formdata)
+
     fetch(server+'/admin/video/upload',{
       method:'POST',
       headers:{Authorization:'Bearer '+localStorage.getItem('token')},
       body:formdata
     }).then((res)=>res.json().then((data)=>{
       console.log(data)
+      setLoader(false);
       window.location.reload()
     }))
-    .catch((err)=>alert('error in uploading'+err));
+    .catch((err)=>{
+      alert('error in uploading'+err)
+      setLoader(false)
+      window.location.reload()
+    });
   }
 
   return(
