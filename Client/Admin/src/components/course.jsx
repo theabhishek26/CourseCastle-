@@ -181,7 +181,7 @@ function UploadFormComp({toggleForm,courseId}){
       console.log(data)
       window.location.reload()
     }))
-    .catch((err)=>alert(err));
+    .catch((err)=>alert('error in uploading'+err));
   }
 
   return(
