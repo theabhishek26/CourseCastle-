@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "c0101d94-9e69-46fc-a8cc-eb184dc6d703",
+		"name": "Course selling app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32199072"
+	},
+	"item": [
+		{
+			"name": "admin-token",
+			"item": [
+				{
+					"name": "Admin sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"adminx\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin sign in",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "harkirat@gmail.com",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/admin/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin create course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "harkirat@gmail.com",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Full stack development\",\n    \"description\": \"Full stack dev course by harkirat\",\n    \"price\": 5999,\n    \"imageLink\": \"https://d33g7sdvsfd029.cloudfront.net/subject/2023-01-17-0.3698267942851394.jpg\",\n    \"published\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "username",
+								"value": "harkirat@gmail.com",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Full stack development\",\n    \"description\": \"Full stack dev course by harkirat\",\n    \"price\": 5999,\n    \"imageLink\": \"https://d33g7sdvsfd029.cloudfront.net/subject/2023-01-17-0.3698267942851394.jpg\",\n    \"published\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin update course",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Full stack development new\",\n    \"description\": \"Full stack dev course by harkirat singh\",\n    \"price\": 5999,\n    \"imageLink\": \"https://d33g7sdvsfd029.cloudfront.net/subject/2023-01-17-0.3698267942851394.jpg\",\n    \"published\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/courses/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get courses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI1NTI0NDM4LCJleHAiOjE3MjU1MjgwMzh9.wuxLYJ16fl6gndgg4rgHWV78eENox2VygwUpwRKB2CU",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/admin/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "Get courses by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI1NTI0NDM4LCJleHAiOjE3MjU1MjgwMzh9.wuxLYJ16fl6gndgg4rgHWV78eENox2VygwUpwRKB2CU",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/admin/course/66d1dfe7797808edb69a39ea"
+					},
+					"response": []
+				},
+				{
+					"name": "upload Video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "video1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "added through multer",
+									"type": "text"
+								},
+								{
+									"key": "uploaded_video",
+									"type": "file",
+									"src": "postman-cloud:///1ef96046-192c-4920-a2a2-8b4b8ff63d3b"
+								},
+								{
+									"key": "videoCourseId",
+									"value": "sdckldklmkl",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:3000/admin/video/upload"
+					},
+					"response": []
+				},
+				{
+					"name": "Post Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMDI5ODY4NiwiZXhwIjoxNzMwMzAyMjg2fQ.yZX3OwRaiUF4-fMY6Epo2rJTS9gqRzbTQWjxhOYGevk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentBody\":\"amxmsekcmk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/course/comment"
+					},
+					"response": []
+				},
+				{
+					"name": "get videos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/videos"
+					},
+					"response": []
+				},
+				{
+					"name": "get comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/videos"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User token",
+			"item": [
+				{
+					"name": "User sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"raman@gmail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/users/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "User sign in",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "user1",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "1111",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "get username",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "user1",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "1111",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "User get courses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/users/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "User purchase course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/users/courses/1688061885461"
+					},
+					"response": []
+				},
+				{
+					"name": "User get purchased course",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/users/purchasedCourses"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
