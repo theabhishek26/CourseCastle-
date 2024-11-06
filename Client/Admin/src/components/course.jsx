@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Loader from '../components/loader';
 
-// const server=server+'';
 
 const server='https://coursemaster-c156.onrender.com';
 // const server='http://localhost:3000';

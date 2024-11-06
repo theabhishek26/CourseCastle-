@@ -3,8 +3,6 @@
 COURSEMASTER is a comprehensive, full-stack course management platform built with the MERN stack, designed to connect educators and learners. Admins can easily create and manage video courses, set pricing, and upload educational content, while users can browse, purchase, and access courses with a streamlined, intuitive interface. The platform features a secure, JWT-based authentication system to keep user and admin access separate and safe. With responsive design, COURSEMASTER offers seamless navigation across devices, making it a practical tool for both educational institutions and individual creators looking to share their expertise.
 
 
-
-
 ## Table of Contents
 - [COURSEMASTER-course selling site](#coursemaster-course-selling-site)
   - [Table of Contents](#table-of-contents)
