@@ -1,4 +1,4 @@
-const express=require('express');
+const express = require('express');
 const jwt=require('jsonwebtoken');
 const{authenticateJwt,jwtPass}=require('../middleware/authentication');  //object destructuring
 const {user,admin,course,video,comment}=require('../DB/db');
